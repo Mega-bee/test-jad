@@ -37,7 +37,8 @@ List<PatientListModel2> ListOfPatients = [
   ),
 ];
 void searchPatientList(String query){
-final suggestions = ListOfPatients.where((ListOfPatients) {
+final suggestions = ListOfPatients.where((ListOfPatients)
+{
   final PatientName = patientListModel2.name!.toLowerCase();
   final input = query.toLowerCase();
   return PatientName.contains(input);
