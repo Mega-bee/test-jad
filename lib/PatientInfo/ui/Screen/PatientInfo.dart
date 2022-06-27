@@ -1,8 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sentinel/GeneralInfo/GeneralInfo.dart';
-import 'package:sentinel/PatientPriorityList/Control/priotity_list_model.dart';
-import 'package:sentinel/PatientPriorityList/ui/Screen/PatientPriorityList.dart';
+import 'package:sentinel/PatientPriorityList/Control/PatientPriorityListModel.dart';
 import '../../../TrackingInfo/ui/Screen/TrackingInfo.dart';
 
 class PatientInfo extends StatefulWidget {

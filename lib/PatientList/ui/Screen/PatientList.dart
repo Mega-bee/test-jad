@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sentinel/Filter2/ui/Screen/Filter2.dart';
 import '../../../Filter1/ui/Screen/Filter1.dart';
 import '../Widget/PatientCard.dart';
 import 'package:sentinel/PatientList/Control/PatientListModel2.dart';
 
-class PatientList extends StatefulWidget {
-  const PatientList({Key? key}) : super(key: key);
+class PatientList extends StatelessWidget {
+  late final PatientListModel2 patientListModel2;
 
-  @override
-  State<PatientList> createState() => _PatientListState();
-}
+ PatientList(this.patientListModel2);
 
 List<PatientListModel2> ListOfPatients = [
   PatientListModel2(
@@ -39,8 +36,17 @@ List<PatientListModel2> ListOfPatients = [
       name: "Peter"
   ),
 ];
-
-class _PatientListState extends State<PatientList> {
+void searchPatientList(String query){
+final suggestions = ListOfPatients.where((ListOfPatients) {
+  final PatientName = patientListModel2.name!.toLowerCase();
+  final input = query.toLowerCase();
+  return PatientName.contains(input);
+}).toList();
+// setState(()
+// =>
+// patientListModel2=suggestions as PatientListModel2
+// );
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,19 +98,8 @@ class _PatientListState extends State<PatientList> {
                             prefixIcon: IconButton(
                                 icon: Icon(Icons.search),
                                 onPressed: () {}
-                            ),
-                            suffixIcon: IconButton(
-                                color: Colors.blue,
-                                icon: Icon(Icons.filter_alt_outlined),
-                                onPressed: () {
-                                  showModalBottomSheet(
-                                      builder: (BuildContext context) => const Filter2(),
-                                      context: context
-                                  );
-                                }
-                            ),
-                          ),
-                          // onChanged: searchPatientList,
+                            ),),
+                          onChanged: searchPatientList,
                         ),
                       ],
                     )

@@ -31,27 +31,62 @@ class _Filter1State extends State<Filter1> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-          body:SingleChildScrollView(
-           child:Padding(
-            padding: EdgeInsets.fromLTRB(16, 21, 16, 25),
-         child:
-          Container(
-                height: MediaQuery.of(context).size.height*0.39,
-                child: GridView.builder(
-                    shrinkWrap: true,
-                    itemCount: Filter1Cards.length,
-                    padding: EdgeInsets.zero,
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        crossAxisSpacing: 0,
-                        mainAxisSpacing: 0,
-                        maxCrossAxisExtent: 200),
-                    itemBuilder: (BuildContext context, int index) {
-                      return
-                          Filter1Card(Filter1Cards[index]);
-                    }),
-              )
-
+      body: SingleChildScrollView(
+          child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 21, 16, 25),
+              child: Column(
+                  children:[
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      child: GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: Filter1Cards.length,
+                          padding: EdgeInsets.zero,
+                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                              crossAxisSpacing: 0,
+                              mainAxisSpacing: 0,
+                              maxCrossAxisExtent: 200),
+                          itemBuilder: (BuildContext context, int index) {
+                            return
+                              Filter1Card(Filter1Cards[index]);
+                          }),
+                    ),
+           SizedBox(
+             height: MediaQuery.of(context).size.height * 0.07,
+             width: MediaQuery
+                 .of(context)
+                 .size
+                 .width * 0.8,
+             child: ElevatedButton(
+               onPressed: () {
+                 //  Navigator.push(
+                 //   context,
+                 //   MaterialPageRoute(
+                 //     builder: (context) {
+                 //       return const MainNavigationBar();
+                 //     },
+                 //   ),
+                 // );
+               },
+               // },
+               child: const Text(
+                 "Apply Filters",
+                 style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),
+               ),
+               style: ButtonStyle(
+                   backgroundColor: MaterialStateProperty.all<Color>(
+                       const Color(0xFF126CF2)),
+                   alignment: Alignment.center,
+                   shape: MaterialStateProperty.all<
+                       RoundedRectangleBorder>(RoundedRectangleBorder(
+                     borderRadius: BorderRadius.circular(30.0),
+                     side: const BorderSide(color: Color(0xFF126CF2)),
+                   ))),
+             ),
+           )
+               ]
           )
+    )
           ),
           );
 

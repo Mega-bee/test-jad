@@ -1,9 +1,14 @@
+
+import 'dart:ui';
+
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:sentinel/LoginPage/ui/Widget/CheckBoxField.dart';
 import 'package:sentinel/LoginPage/ui/Widget/LoginButton.dart';
 import 'package:sentinel/LoginPage/ui/Widget/EmailTextField.dart';
 import 'package:sentinel/LoginPage/ui/Widget/PasswordTextField.dart';
 import 'package:sentinel/LoginPage/ui/Widget/ForgetPassword.dart';
+import 'package:sentinel/NavigationBar/MainNavigationBar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,9 +18,25 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   final formKey=GlobalKey<FormState>();
-
+  late String EmailState="";
+void validateemail(){
+  final bool isValid= EmailValidator.validate(emailController.text.trim());
+  if(isValid){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return const MainNavigationBar();
+        },
+      ),
+    );
+  }
+  else{
+    EmailState="Invalid Email Address";
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     EmailTextField( Emailcontroller: emailController,),
-                    const SizedBox(height: 20),
+                     Container(
+                       alignment:Alignment.topLeft,
+                        height: 20,
+                            child: Text(EmailState,style: TextStyle(color: Colors.redAccent),textAlign: TextAlign.left,)
+                    ),
                     Row(
                       children: const [
                         Text("Password",
@@ -119,7 +144,31 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    const LoginButton()
+                     SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // final form=formKey.currentState!;
+                          // if(form.validate()){
+                          validateemail();
+                        },
+                        // },
+                        child: const Text(
+                          "LOG IN",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xFFB71C1C)),
+                            alignment: Alignment.center,
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                              side: const BorderSide(color: Colors.red),
+                            ))),
+                      ),
+                    )
                   ],
                 ),
               ),

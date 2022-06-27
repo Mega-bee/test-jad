@@ -1,6 +1,6 @@
 class PatientListModel2{
   String?name;
-  PatientListModel2({this.name});
+  PatientListModel2({required this.name});
 }
 // class searchPatient(String query) {
 // final suggestions = ListOfPatients.where((PatientListModel2) {
