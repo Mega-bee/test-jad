@@ -1,4 +1,4 @@
-# sentinel
+# SOS
 
 A new Flutter project.
 
